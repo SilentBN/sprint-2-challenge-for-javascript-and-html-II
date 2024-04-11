@@ -216,7 +216,7 @@
       }
 
       // 👉 CHALLENGE 5
-      function normalizePhoneNumber() {
+      function normalizePhoneNumber(number) {
         // 🧠 normalizePhoneNumber takes a string as its only argument, representing a ten-digit number
         // The function returns a string formatted as seen below
         // 🧠 Examples of usage:
@@ -229,6 +229,30 @@
         // 🌟 HINT: at each iteration, if the current character is an "X", replace it with the result of popping a digit from the number
         // 🌟 HINT: if you'd rather loop forwards, use `shift` instead of `pop`
         // Check if the number is of the correct length and only contains digits
+        if (number.length !== 10 || !/^\d+$/.test(number)) {
+          return number.length !== 10
+            ? "type a 10-digit number"
+            : "invalid phone number";
+        }
+
+        // Convert the number to an array of characters
+        let digits = number.split("");
+
+        // Define the template
+        let template = "(XXX) XXX-XXXX";
+
+        // Loop backwards over the template
+        for (let i = template.length - 1; i >= 0; i--) {
+          // If the current character is an "X", replace it with a digit from the number
+          if (template[i] === "X") {
+            template =
+              template.substring(0, i) +
+              digits.pop() +
+              template.substring(i + 1);
+          }
+        }
+        // Return the formatted number
+        return template;
       }
 
       // 👉 CHALLENGE 6 (bonus, NOT graded)
