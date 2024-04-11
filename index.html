@@ -120,7 +120,7 @@
       }
 
       // 👉 CHALLENGE 2
-      function mineSweeper() {
+      function mineSweeper(grid, x, y) {
         // 🧠 mineSweeper takes a grid as its first argument, and coordinates x and y as the second and third args
         //  The grid is an array of arrays in the following format: [["🟥","🟦","🟥"],["🟦","🟥","🟥"],["🟥","🟦","🟦"]]
         //  Each subarray is a row of the grid, the first subarray being the top row:
@@ -139,6 +139,20 @@
         // 🧠 Edge cases:
         //    * If the x or y coordinates are under 1 or over 3, return the string "invalid coordinates"
         // Check if the x and y coordinates are valid
+        if (x < 1 || x > 3 || y < 1 || y > 3) {
+          return "invalid coordinates";
+        }
+
+        // Adjust the coordinates to match array indices
+        x -= 1;
+        y -= 1;
+
+        // Check the square at the given coordinates
+        if (grid[y][x] === "🟥") {
+          return "🟥 💀";
+        } else if (grid[y][x] === "🟦") {
+          return "🟦 🥳";
+        }
       }
 
       // 👉 CHALLENGE 3
